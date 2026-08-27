@@ -4,8 +4,6 @@ from twilio.twiml.voice_response import VoiceResponse, Gather
 
 app = FastAPI(title="PCOSense API")
 
-BASE_URL = "https://equipment-stew-profound.ngrok-free.dev"
-
 
 @app.get("/")
 def home():
@@ -22,7 +20,7 @@ async def ivr(request: Request):
 
     gather = Gather(
         num_digits=1,
-        action=f"{BASE_URL}/ivr/language",
+        action="https://equipment-stew-profound.ngrok-free.dev/ivr/language",
         method="POST"
     )
 
@@ -56,7 +54,7 @@ async def language(request: Request):
 
         gather = Gather(
             num_digits=1,
-            action=f"{BASE_URL}/ivr/period?lang=hi",
+            action="https://equipment-stew-profound.ngrok-free.dev/ivr/period?lang=hi",
             method="POST"
         )
 
@@ -74,7 +72,7 @@ async def language(request: Request):
 
         gather = Gather(
             num_digits=1,
-            action=f"{BASE_URL}/ivr/period?lang=en",
+            action="https://equipment-stew-profound.ngrok-free.dev/ivr/period?lang=en",
             method="POST"
         )
 
@@ -97,7 +95,9 @@ async def language(request: Request):
             language="hi-IN"
         )
 
-        response.redirect(f"{BASE_URL}/ivr")
+        response.redirect(
+            "https://equipment-stew-profound.ngrok-free.dev/ivr"
+        )
 
     return Response(
         content=str(response),
@@ -121,7 +121,7 @@ async def period(request: Request):
 
     gather = Gather(
         num_digits=1,
-        action=f"{BASE_URL}/ivr/duration?lang={lang}",
+        action=f"https://equipment-stew-profound.ngrok-free.dev/ivr/duration?lang={lang}",
         method="POST"
     )
 
